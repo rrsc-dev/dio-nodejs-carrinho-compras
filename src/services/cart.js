@@ -1,11 +1,3 @@
-//ações do carrinho
-
-    // adicionar item
-    // deletar item
-    // alterar quantidade do item
-    // calcular total
-
-
 async function addItem(userCart, item) {
     userCart.push(item);
 }
@@ -30,8 +22,23 @@ async function displayCart(userCart) {
     });
 }
 
-async function removeItem(userCart, index) {
-    
+async function removeItem(userCart, item) {
+    const indexFound = userCart.findIndex((p) => p.name === item.name);
+
+    if (indexFound == -1) {
+        console.log("item não encontrado");
+        return;
+    }
+
+    if (userCart[indexFound].quantity > 1) {
+        userCart[indexFound].quantity -= 1;
+        return;
+    }
+
+    if (userCart[indexFound].quantity == 1) {
+        userCart.splice(indexFound, 1);
+        return;
+    }
 }
 
 export {
